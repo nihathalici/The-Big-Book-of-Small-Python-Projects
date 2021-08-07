@@ -11,12 +11,55 @@ NUM_DIGITS = 3
 MAX_GUESSES = 10
 
 def main():
-    pass
+    print('''Bagels, a deductive logic game.
+By Al Sweigart al@inventwithpython.com
+I am thinking of a {}-digit number. Try to guess what it is.
+Here are some clues:
+When I say:    That means:
+  Pico         One digit is correct but in the wrong position.
+  Fermi        One digit is correct and in the right position.
+  Bagels       No digit is correct.
+
+For example, if the secret number was 248 and your guess was 843, the
+clues would be Fermi Pico.'''.format(NUM_DIGITS))
+
+    # Main game loop.
+    while True:
+        # This stores the secret number the player needs to guess:
+        secretNum = getSecretNum()
+        print('I have thought up a number.')
+        print(' You have {} guesses to get it.'.format(MAX_GUESSES))
+
+        numGuesses = 1
+        while numGuesses <= MAX_GUESSES:
+            guess = ''
+            # Keep looping until they enter a valid guess:
+            while len(guess) != NUM_DIGITS or not guess.isdecimal():
+                print('Guess #{}: '.format(numGuesses))
+                guess = input('> ')
+
+            clues = getClues(guess, secretNum)
+            print(clues)
+            numGuesses += 1
+
+            if guess == secretNum:
+                # They're correct, so break out of this loop.
+                break
+            if numGuesses > MAX_GUESSES:
+                print('You ran out of guesses.')
+                print('The answer was {}.'.format(secretNum))
+
+        # Ask player if they want to play again.
+        print('Do you want to play again? (yes or no)')
+        if not input('> ').lower().startswith('y'):
+            break
+    print('Thanks for playing!')
+
 
 def getSecretNum():
     """Returns a string made up of NUM_DIGITS unique random digits."""
     # Create a list of digits 0 to 9.
-    numbers = list('0, 1, 2, 3, 4, 5, 6, 7, 8, 9')
+    numbers = list('0123456789')
     # Shuffle them into random order.
     random.shuffle(numbers)
 
@@ -48,7 +91,7 @@ def getClues(guess, secretNum):
         # doesn't give information away.
         clues.sort()
         # Make a single string from the list of string clues.
-        return ' 'join(clues)
+        return ' '.join(clues)
 
 
 # If the program is run (instead of imported), run the game:
