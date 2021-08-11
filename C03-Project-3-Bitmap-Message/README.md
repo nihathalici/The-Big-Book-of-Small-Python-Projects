@@ -4,7 +4,7 @@ Bitmap Message
 This program uses a multiline string as a bitmap, a 2D image with only two possible 
 colors for each pixel, to determine how it should display a message from the user.
 
-bagels.py
+bitmapmessage.py
 ========================================================
 ```Python3
 """Bitmap Message, by Al Sweigart al@inventwithpython.com
