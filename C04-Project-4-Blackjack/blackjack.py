@@ -124,4 +124,29 @@ def displayCards(cards):
         
 
 def getMove(playerHand, money):
-    pass
+    """Asks the player for their move, and returns 'H' for hit, 'S' for
+    stand, and 'D' for double down."""
+    # Keep looping until the player enters a correct move.
+    while True:
+        # Determine what moves the player can make:
+        moves = ['(H)it', '(S)tand']
+
+        # The player can double down on their first move, which we can
+        # tell because they'll have exactly two cards:
+        if len(playerHand) == 2 and money > 0:
+            moves.append('(D)ouble down')
+
+        # Get the player's move:
+        movePrompt = ', '.join(moves) + '> '
+        move = input(movePrompt).upper()
+        if move in ('H', 'S'):
+            # Player has entered a valid move.
+            return move
+        if move == 'D' and '(D)ouble down' in moves:
+            # Player has entered a valid move.
+            return move
+
+# If the program is run (instead of imported), run the game:
+if __name__ == '__main__':
+    main()       
+ 
