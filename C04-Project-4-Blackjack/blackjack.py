@@ -98,7 +98,30 @@ def getHandValue(cards):
     return value
 
 def displayCards(cards):
-    pass
+    """Display all the cards in the cards list."""
+    # The text to display on each row.
+    rows = ['', '', '', '', '']
+
+    for i, card in enumerate(cards):
+        # Print the top line of the card.
+        rows[0] += ' ___  '
+        if card == BACKSIDE:
+            # Print a card's back:
+            rows[1] += '|## | '
+            rows[2] += '|###| '
+            rows[3] += '|_##| '
+        else:
+            # Print the card's front:
+            # The card is a tuple data structure.
+            rank, suit = card
+            rows[1] += '|{} | '.format(rank.ljust(2))
+            rows[2] += '| {} |'.format(suit)
+            rows[3] += '|_{}| '.format(rank.rjust(2, '_'))
+
+    # Print each row on the screen:
+    for row in rows:
+        print(row)
+        
 
 def getMove(playerHand, money):
     pass
