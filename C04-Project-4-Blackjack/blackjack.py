@@ -122,18 +122,6 @@ def main():
             input('Press Enter to continue...')
             print('\n\n')
                 
-                
-            
-            
-                
-                
-        
-        
-      
-      
-      
-      
-    
     
 
 def getBet(maxBet):
