@@ -68,4 +68,4 @@ Sample Output
 ========================================================
 Input is marked in bold.
 
-![Sample output Bagels Deduction Game](https://github.com/nihathalici/The-Big-Book-of-Small-Python-Projects/blob/main/C03-Project-3-Bitmap-Message/bitmapmessage_sample_screenshot.PNG)
+![Sample output Bitmap Message](https://github.com/nihathalici/The-Big-Book-of-Small-Python-Projects/blob/main/C03-Project-3-Bitmap-Message/bitmapmessage_sample_screenshot.PNG)
