@@ -125,4 +125,4 @@ Sample Output
 ========================================================
 Input is marked in bold.
 
-![Sample output Bagels Deduction Game](https://github.com/nihathalici/The-Big-Book-of-Small-Python-Projects/blob/main/C02-Project-2-Birthday-Paradox/birthdayparadox_sample_output.PNG)
+![Sample output Birthday Paradox](https://github.com/nihathalici/The-Big-Book-of-Small-Python-Projects/blob/main/C02-Project-2-Birthday-Paradox/birthdayparadox_sample_output.PNG)
