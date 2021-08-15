@@ -1,7 +1,7 @@
 
 Bouncing DVD
 ========================================================
-
+This program simulates DVD logo by making it change direction each time it hits an edge. 
 
 
 bouncing_dvd.py
