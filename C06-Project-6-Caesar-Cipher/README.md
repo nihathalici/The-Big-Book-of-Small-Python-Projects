@@ -1,7 +1,7 @@
 Caesar Cipher
 ========================================================
 
-The Caesar cipher is an ancient encryp- tion algorithm used by Julius Caesar. It encrypts letters by shifting them over by a certain number of places in the alphabet. 
+The Caesar cipher is an ancient encryption algorithm used by Julius Caesar. It encrypts letters by shifting them over by a certain number of places in the alphabet. 
 
 caesarcipher.py
 ========================================================
@@ -104,5 +104,7 @@ except:
 
 Sample Output
 ========================================================
+
+The player’s input is marked in bold.
 
 ![Sample output Caesar Cipher](https://github.com/nihathalici/The-Big-Book-of-Small-Python-Projects/blob/main/C06-Project-6-Caesar-Cipher/caesarscipher_sample_output.PNG)
