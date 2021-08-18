@@ -4,6 +4,8 @@ Calendar Maker
 
 This program generates printable text files of monthly calendars for the month and year you enter. 
 
+**[Mini version of the calendar](https://github.com/nihathalici/The-Big-Book-of-Small-Python-Projects/blob/main/C08-Project-8-Calendar-Maker/README-mini-version.md)** - Print a “mini” calendar that has dates without boxes.
+
 calendarmaker.py
 ========================================================
 
