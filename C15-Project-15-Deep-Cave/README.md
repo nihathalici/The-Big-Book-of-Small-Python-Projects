@@ -56,7 +56,7 @@ while True:
     #    pass  # Do nothing; no change in gap width.
  ```
  
-Deep Cave
+Sample output
 ========================================================
 
 ![Sample output Deep Cave](https://github.com/nihathalici/The-Big-Book-of-Small-Python-Projects/blob/main/C15-Project-15-Deep-Cave/deepcave_sample_output.PNG)
