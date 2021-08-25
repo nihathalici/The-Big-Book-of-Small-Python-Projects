@@ -1,1 +1,72 @@
 
+Diamonds
+========================================================
+
+This program features a small algorithm for drawing ASCII-art diamonds of various sizes.
+
+
+diamonds.py
+========================================================
+```Python3
+r"""Diamonds, by Al Sweigart al@inventwithpython.com
+Draws diamonds of various sizes.
+View this code at https://nostarch.com/big-book-small-python-projects
+                            /\       /\
+                           /  \     //\\
+             /\     /\    /    \   ///\\\
+            /  \   //\\  /      \ ////\\\\
+  /\   /\  /    \ ///\\\ \      / \\\\////
+ /  \ //\\ \    / \\\///  \    /   \\\///
+ \  / \\//  \  /   \\//    \  /     \\//
+  \/   \/    \/     \/      \/       \/
+Tags: tiny, beginner, artistic"""
+
+def main():
+    print('Diamonds, by Al Sweigart al@inventwithpython.com')
+
+    # Display diamonds of sizes 0 through 6:
+    for diamondSize in range(0, 3):
+        displayOutlineDiamond(diamondSize)
+        print()  # Print a newline.
+        displayFilledDiamond(diamondSize)
+        print()  # Print a newline.
+        
+def displayOutlineDiamond(size):
+    # Display the top half of the diamond:
+    for i in range(size):
+        print(' ' * (size - i - 1), end = '')  # Left side space.
+        print('/', end = '')  # Left side of diamond.
+        print(' ' * (i * 2), end = '')  # Interior of diamond.
+        print('\\')  # Right side of diamond.
+
+    # Display the bottom half of the diamond:
+    for i in range(size):
+        print(' ' * i, end = '')  # Left side space.
+        print('\\', end = '')  # Left side of diamond.
+        print(' ' * ((size - i - 1) * 2), end = '')  # Interior of diamond.
+        print('/')  # Right side of diamond.
+        
+
+def displayFilledDiamond(size):
+    # Display the top half of the diamond:
+    for i in range(size):
+        print(' ' * (size - i - 1), end = '')  # Left side space.
+        print('/' * (i + 1), end = '')  # Left half of diamond.
+        print('\\' * (i + 1))  # Right half of diamond.
+
+    # Display the bottom half of the diamond:
+    for i in range(size):
+        print(' ' * i, end = '')  # Left side space.
+        print('\\' * (size - i), end = '')  # Left side of diamond.
+        print('/' * (size - i))  # Right side of diamond.
+        
+# If this program was run (instead of imported), run the game:
+if __name__ == '__main__':
+    main()
+
+```
+
+Sample Output
+========================================================
+
+![Sample output Diamonds](https://github.com/nihathalici/The-Big-Book-of-Small-Python-Projects/blob/main/C16-Project-16-Diamonds/diamonds_sample_output.PNG)
