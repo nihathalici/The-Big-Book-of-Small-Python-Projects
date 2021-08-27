@@ -34,4 +34,56 @@ D2a = (['+-------+',
         '|     O |',
         '+-------+'], 2)
 
+D2b = (['+-------+',
+        '|     O |',
+        '|       |',
+        '| O     |',
+        '+-------+'], 2)
+
+D3a = (['+-------+',
+        '| O     |',
+        '|   O   |',
+        '|     O |',
+        '+-------+'], 3)
+
+D3b = (['+-------+',
+        '|     O |',
+        '|   O   |',
+        '| O     |',
+        '+-------+'], 3)
+
+D4 =  (['+-------+',
+        '| O   O |',
+        '|       |',
+        '| O   O |',
+        '+-------+'], 4)
+
+D5 =  (['+-------+',
+        '| O   O |',
+        '|   O   |',
+        '| O   O |',
+        '+-------+'], 5)
+
+D6a =  (['+-------+',
+        '| O   O |',
+        '| O   O |',
+        '| O   O |',
+        '+-------+'], 6)
+
+D6b = (['+-------+',
+        '| O O O |',
+        '|       |',
+        '| O O O |',
+        '+-------+'], 6)
+
+
+ALL_DICE = [D1, D2a, D2b, D3a, D3b, D4, D5, D6a, D6b]
+
+print('''Dice Math, by Al Sweigart al@inventwithpython.com
+
+Add up the sides of all the dice displayed on the screen. You have
+{} seconds to answer as many as possible. You get {} points for each
+correct answer and lose {} point for each incorrect answer.
+'''.format(QUIZ_DURATION, REWARD, PENALTY))
+input('Press Enter to begin...')
 
