@@ -9,5 +9,5 @@ Synopsis taken from the book:
 Links and Appendix
 ========================================================
 
-- Get the book: https://automatetheboringstuff.com/
+- Get the book: https://nostarch.com/big-book-small-python-programming
 - About Al Sweigart and his works: https://alsweigart.com/
