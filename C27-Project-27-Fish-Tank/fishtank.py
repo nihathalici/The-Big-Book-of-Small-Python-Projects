@@ -89,13 +89,47 @@ def main():
         time.sleep(1 / FRAMES_PER_SECOND)
         clearAquarium()
         STEP += 1
-        
+
 
 def getRandomColor():
-    pass
+    """Return a string of a random color."""
+    return random.choice(('black', 'red', 'green', 'yellow', 'blue',
+                          'purple', 'cyan', 'white'))
 
 def generateFish():
-    pass
+    """Return a dictionary that represents a fish."""
+    fishType = random.choice(FISH_TYPES)
+
+    # Set up colors for each character in the fish text:
+    colorPattern = random.choice(('random', 'head-tail', 'single'))
+    fishLength = len(fishType['right'][0])
+    if colorPattern == 'random':  # All parts are randomly colored.
+        colors = []
+        for i in range(fishLength):
+            colors.append(getRandomColor())
+    if colorPattern == 'single' or colorPattern == 'head-tail':
+        colors = [getRandomColor()] * fishLength  # All the same color.
+    if colorPattern == 'head-tail':  # Head/tail different from body.
+        headTailColor = getRandomColor()
+        colors[0] = headTailColor  # Set head color.
+        colors[-1] = headTailColor  # Set tail color.
+
+    # Set up the rest of fish data structure:
+    fish = {'right':               fishType['right'],
+            'left':                fishType['left'],
+            'colors'               colors,
+            'hSpeed':              random.randint(1, 6),
+            'vSpeed':              random.randint(5, 15),
+            'timeToHDirChange':    random.randint(10, 60),
+            'timeToVDirChange':    random.randint(2, 20),
+            'goingRight':          random.choice([True, False]),
+            'goingDown':           random.choice([True, False])}
+
+    # 'x' is always the leftmost side of the fish body:
+    fish['x'] = random.randint(0, WIDTH - 1 - LONGEST_FISH_LENGTH)
+    fish['y'] = random.randint(0, HEIGHT - 2)
+    return fish
+
 
 def simulateAquarium():
     pass
@@ -105,3 +139,10 @@ def drawAquarium():
 
 def clearAquarium():
     pass
+
+# If this program was run (instead of imported), run the game:
+if __name__ == '__main__':
+    try:
+        main()
+    except KeyboardInterrupt:
+        sys.exit()   # When Ctrl-C is pressed, end the program.
