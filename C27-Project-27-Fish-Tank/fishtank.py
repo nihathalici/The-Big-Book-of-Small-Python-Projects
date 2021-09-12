@@ -132,7 +132,84 @@ def generateFish():
 
 
 def simulateAquarium():
-    pass
+    """Simulate the movements in the aquarium for one step."""
+    global FISHES, BUBBLERS, BUBBLES, KELP, STEP
+
+    # Simulate the fish for one step:
+    for fish in FISHES:
+        # Move the fish horizontally:
+        if STEP % fish['hSpeed'] == 0:
+            if fish['goingRight']:
+                if fish['x'] != RIGHT_EDGE:
+                    fish['x'] += 1  # Move the fish right.
+                else:
+                    fish['goingRight'] == False  # Turn the fish around.
+                    fish['colors'].reverse()  # Turn the colors around.
+            else:
+                if fish['x'] != LEFT_EDGE:
+                    fish['x'] -= 1  # Move the fish left.
+                else:
+                    fish['goingRight'] = True # Turn the fish around.
+                    fish['colors'].reverse() # Turn the colors around.
+
+        # Fish can randomly change their horizontal direction:
+        fish['timeToHDirChange'] -= 1
+        if fish['timeToHDirChange'] == 0:
+            fish['timeToHDirChange'] = random.randint(10, 60)
+            # Turn the fish around:
+            fish['goingRight'] = not fish['goingRight']
+
+        # Move the fish vertically:
+        if STEP % fish['vSpeed'] == 0:
+            if fish['goingDown']:
+                if fish['y'] != BOTTOM_EDGE:
+                    fish['y'] += 1  # Move the fish down.
+                else:
+                    fish['goingDown'] = False   # Turn the fish around.
+            else:
+                if fish['y'] != TOP_EDGE:
+                    fish['y'] -= 1  # Move the fish up.
+                else:
+                    fish['goingDown'] = True  # Turn the fish around.
+
+        # Fish can randomly change their vertical direction:
+        fish['timeToVDirChange'] -= 1
+        if fish['timeToVDirChange'] == 0:
+            fish['timeToVDirChange'] = random.randint(2, 20)
+            # Turn the fish around:
+            fish['goingDown'] = not fish['goingDown']
+
+    # Generate bubbles from bubblers:
+    for bubbler in BUBBLERS:
+        # There is a 1 in 5 chance of making a bubble:
+        if random.randint(1, 5) == 1:
+            BUBBLES.append({'x': bubbler, 'y': HEIGHT - 2})
+
+    # Move the bubbles:
+    for bubble in BUBBLES:
+        diceRoll = random.randint(1, 6)
+        if (diceRoll == 1) and (bubble['x'] != LEFT_EDGE):
+            bubble['x'] -= 1  # Bubble goes left.
+        elif (diceRoll == 2) and (bubble['x'] != RIGHT_EDGE):
+            bubble['x'] += 1  # Bubble goes right.
+
+        bubble['y'] -= 1  # The bubble always goes up.
+
+    # Iterate over BUBBLES in reverse because I'm deleting from BUBBLES
+    # while iterating over it.
+    for i in range(len(BUBBLES) - 1, - 1, -1):
+        if BUBBLES[i]['y'] == TOP_EDGE:  # Delete bubbles that reach the top.
+            del BUBBLES[i]
+
+    # Simulate the kelp waving for one step:
+    for kelp in KELPS:
+        for i, kelpSegment in enumerate(kelp['segments']):
+            # 1 in 20 chance to change waving:
+            if random.randint(1, 20) == 1:
+                if kelpSegment == '(':
+                    kelp['segments'][i] = ')'
+                elif kelpSegment == ')':
+                    kelp['segments'][i] = '('
 
 def drawAquarium():
     pass
