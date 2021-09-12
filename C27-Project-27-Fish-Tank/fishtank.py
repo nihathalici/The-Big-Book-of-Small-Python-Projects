@@ -212,10 +212,78 @@ def simulateAquarium():
                     kelp['segments'][i] = '('
 
 def drawAquarium():
-    pass
+    """Draw the aquarium on the screen."""
+    global FISHES, BUBBLERS, BUBBLES, KELP, STEP
+
+    # Draw quit message.
+    bext.fg('white')
+    bext.goto(0, 0)
+    print('Fish Tank, by Al Sweigart    Ctrl-C to quit.', end='')
+
+    # Draw the bubbles:
+    bext.fg('white')
+    for bubble in BUBBLES:
+        bext.goto(bubble['x'], bubble['y'])
+        print(random.choice(('o', 'O')), end='')
+
+    # Draw the fish:
+    for fish in FISHES:
+        bext.goto(fish['x'], fish['y'])
+
+        # Get the correct right- or left-facing fish text.
+        if fish['goingRight']:
+            fishText = fish['right'][STEP % len(fish['right'])]
+        else:
+            fishText = fish['left'][STEP % len(fish['left'])]
+
+        # Draw each character of the fish text in the right color.
+        for i, fishPart in enumerate(fishText):
+            bext.fg(fish['colors'][i])
+            print(fishPart, end='')
+
+    # Draw the kelp:
+    bext.fg('green')
+    for kelp in KELPS:
+        for i, kelpSegment in enumerate(kelp['segments']):
+            if kelpSegment == '(':
+                bext.goto(kelp['x'], BOTTOM_EDGE - i)
+            elif kelpSegment == ')':
+                bext.goto(kelp['x'] + 1, BOTTOM_EDGE - i)
+            print(kelpSegment, end='')
+
+    # Draw the sand on the bottom:
+    bext.fg('yellow')
+    bext.goto(0, HEIGHT - 1)
+    print(chr(9617) * (WIDTH - 1), end='')  # Draws sand.
+
+    sys.stdout.flush()  # (Required for bext-using programs.)
+
+
 
 def clearAquarium():
-    pass
+    """Draw empty spaces over everything on the screen."""
+    global FISHES, BUBBLERS, BUBBLES, KELP
+
+    # Draw the bubbles:
+    for fish in FISHES:
+        bext.goto(bubble['x'], bubble['y'])
+        print(' ',  end='')
+
+    # Draw the fish:
+    for fish in FISHES:
+        bext.goto(fish['x'], fish['y'])
+
+        # Draw each character of the fish text in the right color.
+        print(' ' * len(fish['left'][0]), end='')
+
+    # Draw the kelp:
+    for kelp in KELPS:
+        for i, kelpSegment in enumerate(kelp['segments']):
+            bext.goto(kelp['x'], HEIGHT - 2 - i)
+            print('  ', end='')
+
+    sys.stdout.flush()  # (Required for bext-using programs.)
+
 
 # If this program was run (instead of imported), run the game:
 if __name__ == '__main__':
