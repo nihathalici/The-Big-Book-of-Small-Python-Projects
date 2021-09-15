@@ -44,13 +44,65 @@ COLORS_MAP = {0: 'red', 1: 'green', 2: 'blue',
 COLOR_MODE = 'color mode'
 SHAPES_MAP = {0: HEART, 1: TRIANGLE, 2: DIAMOND,
               3: BALL, 4: CLUB, 5: SPADE}
-SHAPE_MODE = 'shape mode'    
+SHAPE_MODE = 'shape mode'
 
 def main():
-    pass
+    bext.bg('black')
+    bext.fg('white')
+    bext.clear()
+    print('''Flooder, by Al Sweigart al@inventwithpython.com
+
+Set the upper left color/shape, which fills in all the
+adjacent squares of that color/shape. Try to make the
+entire board the same color/shape.''')
+
+    print('Do you want to play in colorblind mode? Y/N')
+    response = input('> ')
+    if response.upper().startswith('Y'):
+        displayMode = SHAPE_MODE
+    else:
+        displayMode = COLOR_MODE
+
+    gameBoard = getNewBoard()
+    movesLeft = MOVES_PER_GAME
+
+    while True:  # Main game loop.
+        displayBoard(gameBoard, displayMode)
+
+        print('Moves left:', movesLeft)
+        playerMove = askForPlayerMove(displayMode)
+        changeTile(playerMove, gameBoard, 0, 0)
+        movesLeft -= 1
+
+        if hasWon(gameBoard):
+            displayBoard(gameBoard, displayMode)
+            print('You have won!')
+            break
+        elif movesLeft == 0:
+            displayBoard(gameBoard, displayMode)
+            print('You have run out of moves!')
+            break
+
 
 def getNewBoard():
-    pass
+    """Return a dictionary of a new Flood It board."""
+
+    # Keys are (x, y) tuples, values are the tile at that position.
+    board = {}
+
+    # Create random colors for the board.
+    for x in range(BOARD_WIDTH):
+        for y in range(BOARD_HEIGHT):
+            board[(x, y)] = random.choice(TILE_TYPES)
+
+    # Make several tiles the same as their neighbor. This creates groups
+    # of the same color/shape
+    for i in range(BOARD_WIDTH * BOARD_HEIGHT):
+        x = random.randint(0, BOARD_WIDTH - 2)
+        y = random.randint(0, BOARD_HEIGHT - 1)
+        board[(x + 1, y)] = board[(x, y)]
+    return board
+    
 
 def displayBoard():
     pass
