@@ -179,8 +179,39 @@ def askForPlayerMove():
             return {'H': 0, 'T': 1, 'D': 2,
                 'B': 3, 'C': 4, 'S': 5}[response]
 
-def changeTile():
-    pass
+def changeTile(tileType, board, x, y, charToChange=None):
+    """Change the color/shape of a tile using the recursive flood fill
+    algorithm."""
+    if x == 0 and y == 0:
+        charToChange = board[(x, y)]
+        if tileType == charToChange:
+            return  # Base Case: Already is the same tile.
+
+    board[(x, y)] = tileType
+
+    if x > 0 and board[(x - 1, y)] == charToChange:
+        # Recursive Case: Change the left neighbor's tile:
+        changeTile(tileType, board, x - 1, y, charToChange)
+    if y > 0 and board[(x, y - 1)] == charToChange:
+        # Recursive Case: Change the top neighbor's tile:
+        changeTile(tileType, board, x, y - 1, charToChange)
+    if x < BOARD_WIDTH - 1 and board[(x + 1, y)] == charToChange:
+        # Recursive Case: Change the right neighbor's tile:
+        changeTile(tileType, board, x + 1, y, charToChange)
+    if y < BOARD_HEIGHT - 1 and board[(x, y + 1)] == charToChange:
+        # Recursive Case: Change the bottom neighbor's tile:
+        changeTile(tileType, board, x, y + 1, charToChange)
 
 def hasWon():
-    pass
+    """Return True if the entire board is one color/shape."""
+    tile = board[(0, 0)]
+
+    for x in range(BOARD_WIDTH):
+        for y in range(BOARD_HEIGHT):
+            if board[(x, y)] != tile:
+                return False
+    return True
+
+ # If this program was run (instead of imported), run the game:
+ if __name__ = '__main__':
+     main()
