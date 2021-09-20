@@ -35,7 +35,7 @@ to make four in a row horizontally, vertically, or diagonally.
         # Check for a win or tie:
         if isWinner(playerTurn, gameBoard):
             displayBoard(gameBoard)  # Display the board one last time.
-            print('There is a tie!')
+            print('Ther is a tie!')
             sys.exit()
 
         # Switch turns to other player:
@@ -45,13 +45,66 @@ to make four in a row horizontally, vertically, or diagonally.
             playerTurn = PLAYER_X
 
 def getNewBoard():
-    pass
+    """Returns a dictionary that represents a Four in a Row board.
+    The keys are (columnIndex, rowIndex) tuples of two integers, and the
+    values are one of the 'X', 'O' or '.' (empty space) strings."""
+    board = {}
+    for columnIndex in range(BOARD_WIDTH):
+        for rowIndex in range(BOARD_HEIGHT):
+            board[(columnIndex, rowIndex)] = EMPTY_SPACE
+    return board
 
 def displayBoard():
-    pass
+    """Display the board and its tiles on the screen."""
+
+    '''Prepare a list to pass to the format() string method for the
+    board template. The list holds all of the board's tiles (and empty
+    spaces) going left to right, top to bottom:'''
+    tileChars = []
+    for rowIndex in range(BOARD_HEIGHT):
+        for columnIndex in range(BOARD_WIDTH):
+            tileChars.append(board[(columnIndex, rowIndex)])
+
+    # Display the board:
+    print("""
+     1234567
+    +-------+
+    |{}{}{}{}{}{}{}|
+    |{}{}{}{}{}{}{}|
+    |{}{}{}{}{}{}{}|
+    |{}{}{}{}{}{}{}|
+    |{}{}{}{}{}{}{}|
+    |{}{}{}{}{}{}{}|
+    +-------+""".format(*tileChars))
 
 def askForPlayerMove(playerTile, board):
-    pass
+    """Let a player select a column on the board to drop a tile into.
+
+    Returns a tuple of the (column, row) that the tile falls into."""
+    while True:  # Keep asking player until they enter a valid move.
+        print('Player {}, enter a column or QUIT:'.format(playerTile))
+        response = input('> ').upper().strip()
+
+        if response == 'QUIT':
+            print('Thanks for playing!')
+            sys.exit()
+
+        if response not in COLUMN_LABELS:
+            print('Enter a number from 1 to {}.'.format(BOARD_WIDTH))
+            continue  # Ask player again for their move.
+
+        columnIndex = int(response) - 1  # -1 for 0-based the index.
+
+        # If the column is full, ask for a move again:
+        if board[(columnIndex, 0)] != EMPTY_SPACE:
+            print('That column is full, select another one.')
+            continue  # Ask player again for their move.
+
+        # Starting from the bottom, find the first empty space.
+        for rowIndex in range(BOARD_HEIGHT - 1, -1, -1):
+            if board[(columnIndex, rowIndex)] == EMPTY_SPACE:
+                return (columnIndex, rowIndex)
+
 
 def isFull(board):
     pass
