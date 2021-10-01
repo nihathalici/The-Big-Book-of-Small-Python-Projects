@@ -51,7 +51,26 @@ for y in range(8):
 
         
 def main():
-    pass
+    bext.fg('yellow')
+    bext.clear()
+
+    # Draw the quit message:
+    bext.goto(0, 0)
+    print('Ctrl-C to quit.', end='')
+
+    # Display the walls of the hourglass:
+    for wall in HOURGLASS:
+        bext.goto(wall[X], wall[Y])
+        print(WALL, end='')
+
+    while True:  # Main program loop.
+        allSand = list(INITIAL_SAND)
+        # Draw the initial sand:
+        for sand in allSand:
+            bext.goto(sand[X], sand[Y])
+            print(SAND, end='')
+
+        runHourglassSimulation(allSand)
 
 def runHourglassSimulation():
     pass
