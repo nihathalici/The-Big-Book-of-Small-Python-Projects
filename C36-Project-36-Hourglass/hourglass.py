@@ -49,7 +49,7 @@ for y in range(8):
     for x in range(19 + y, 36 - y):
         INITIAL_SAND.add((x, y + 4))
 
-        
+
 def main():
     bext.fg('yellow')
     bext.clear()
@@ -72,5 +72,42 @@ def main():
 
         runHourglassSimulation(allSand)
 
-def runHourglassSimulation():
-    pass
+def runHourglassSimulation(allSand):
+    """Keep running the sand falling simulation until the sand stops
+    moving."""
+    while True:   # Keep looping until sand has run out.
+        random.shuffle(allSand)  # Random order of grain simulation.
+
+        sandMovedOnThisStep = False
+        for i, sand in enumerate(allSand):
+            if sand[Y] == SCREEN_HEIGHT - 1:
+                # Sand is on the very bottom, so it won't move:
+                continue
+
+            # If nothing is under this sand, move it down:
+            noSandBelow = (sand[X], sand[Y] + 1) not in allSand
+            noWallBelow = (sand[X], sand[Y] + 1) not in HOURGLASS
+            canFallDown = noSandBelow and noWallBelow
+
+            if canFallDown:
+                # Draw the sand in its new position down one space:
+                bext.goto(sand[X], sand[Y])
+                print(' ', end='')  # Clear the old position.
+                bext.goto(sand[X], sand[Y] + 1)
+                print(SAND, end='')
+
+                # Set the sand in its new position down one space:
+                allSand[i] = (sand[X], sand[Y] + 1)
+                sandMovedOnThisStep = True
+            else:
+                 # Check if the sand can fall to the left:
+                 belowLeft = (sand[X] - 1, sand[Y] + 1)
+                 noSandBelowLeft = belowLeft not in allSand
+                 noWallBelowLeft = belowLeft not in HOURGLASS
+                 left = (sand[X] - 1, sand[Y])
+                 noWallLeft = left not in HOURGLASS
+                 notOnLeftEdge = sand[X] > 0
+                 canFallLeft = (noSandBelowLeft and noWallBelowLeft
+                     and noWallLeft and notOnLeftEdge)
+
+                # Check if the sand can fall to the right:
