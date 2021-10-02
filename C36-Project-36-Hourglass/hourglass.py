@@ -1,11 +1,10 @@
 """Hourglass, by Al Sweigart al@inventwithpython.com
 An animation of an hourglass with falling sand. Press Ctrl-C to stop.
-View this code at https://nostarch.com/big-book-small-python-projects
+This code is available at https://nostarch.com/big-book-small-python-programming
 Tags: large, artistic, bext, simulation"""
 
 import random, sys, time
 
-# chq bext module
 try:
     import bext
 except ImportError:
@@ -15,7 +14,8 @@ except ImportError:
     sys.exit()
 
 # Set up the constants:
-PAUSE_LENGTH = 0.2
+PAUSE_LENGTH = 0.2  # (!) Try changing this to 0.0 or 1.0.
+# (!) Try changing this to any number between 0 and 100:
 WIDE_FALL_CHANCE = 50
 
 SCREEN_WIDTH = 79
@@ -25,18 +25,17 @@ Y = 1  # The index of Y values in an (x, y) tuple is 1.
 SAND = chr(9617)
 WALL = chr(9608)
 
-# Set up the walls of the hourglass:
+# Set up the walls of the hour glass:
 HOURGLASS = set()  # Has (x, y) tuples for where hourglass walls are.
+# (!) Try commenting out some HOURGLASS.add() lines to erase walls:
 for i in range(18, 37):
     HOURGLASS.add((i, 1))  # Add walls for the top cap of the hourglass.
     HOURGLASS.add((i, 23))  # Add walls for the bottom cap.
-
 for i in range(1, 5):
     HOURGLASS.add((18, i))  # Add walls for the top left straight wall.
     HOURGLASS.add((36, i))  # Add walls for the top right straight wall.
     HOURGLASS.add((18, i + 19))  # Add walls for the bottom left.
     HOURGLASS.add((36, i + 19))  # Add walls for the bottom right.
-
 for i in range(8):
     HOURGLASS.add((19 + i, 5 + i))  # Add the top left slanted wall.
     HOURGLASS.add((35 - i, 5 + i))  # Add the top right slanted wall.
@@ -65,6 +64,7 @@ def main():
 
     while True:  # Main program loop.
         allSand = list(INITIAL_SAND)
+
         # Draw the initial sand:
         for sand in allSand:
             bext.goto(sand[X], sand[Y])
@@ -72,10 +72,11 @@ def main():
 
         runHourglassSimulation(allSand)
 
+
 def runHourglassSimulation(allSand):
     """Keep running the sand falling simulation until the sand stops
     moving."""
-    while True:   # Keep looping until sand has run out.
+    while True:  # Keep looping until sand has run out.
         random.shuffle(allSand)  # Random order of grain simulation.
 
         sandMovedOnThisStep = False
@@ -100,15 +101,15 @@ def runHourglassSimulation(allSand):
                 allSand[i] = (sand[X], sand[Y] + 1)
                 sandMovedOnThisStep = True
             else:
-                 # Check if the sand can fall to the left:
-                 belowLeft = (sand[X] - 1, sand[Y] + 1)
-                 noSandBelowLeft = belowLeft not in allSand
-                 noWallBelowLeft = belowLeft not in HOURGLASS
-                 left = (sand[X] - 1, sand[Y])
-                 noWallLeft = left not in HOURGLASS
-                 notOnLeftEdge = sand[X] > 0
-                 canFallLeft = (noSandBelowLeft and noWallBelowLeft
-                     and noWallLeft and notOnLeftEdge)
+                # Check if the sand can fall to the left:
+                belowLeft = (sand[X] - 1, sand[Y] + 1)
+                noSandBelowLeft = belowLeft not in allSand
+                noWallBelowLeft = belowLeft not in HOURGLASS
+                left = (sand[X] - 1, sand[Y])
+                noWallLeft = left not in HOURGLASS
+                notOnLeftEdge = sand[X] > 0
+                canFallLeft = (noSandBelowLeft and noWallBelowLeft
+                    and noWallLeft and notOnLeftEdge)
 
                 # Check if the sand can fall to the right:
                 belowRight = (sand[X] + 1, sand[Y] + 1)
@@ -179,11 +180,12 @@ def runHourglassSimulation(allSand):
             for sand in allSand:
                 bext.goto(sand[X], sand[Y])
                 print(' ', end='')
-            break   # Break out of main simulation loop.
+            break  # Break out of main simulation loop.
 
- # If this program was run (instead of imported), run the game:
- if __name__ == '__main__':
+
+# If this program was run (instead of imported), run the game:
+if __name__ == '__main__':
     try:
-         main()
+        main()
     except KeyboardInterrupt:
-        sys.exit()   # When Ctrl-C is pressed, end the program.
+        sys.exit()  # When Ctrl-C is pressed, end the program.
