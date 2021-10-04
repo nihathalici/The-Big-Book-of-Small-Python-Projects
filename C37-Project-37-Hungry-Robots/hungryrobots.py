@@ -57,7 +57,37 @@ through the corners of two diagonal walls!
                 sys.exit()
 
 def getNewBoard():
-    pass
+    """Returns a dictionary that represents the board. The keys are
+    (x, y) tuples of integer indexes for board positions, the values are
+    ALL, EMPTY_SPACE, or DEAD_ROBOT. The dictionary also has the key
+    'teleports' for the number of teleports the player has left.
+    The living robots are stored separately from the board dictionary."""
+    board = {'teleports': NUM_TELEPORTS}
+
+    # Create an empty board:
+    for x in range(WIDTH):
+        for y in range(HEIGHT):
+            board[(x, y)] = EMPTY_SPACE
+
+    # Add walls on the edges of the board:
+    for x in range(WIDTH):
+        board[(x, 0)] = WALL   # Make top wall.
+        board[(x, HEIGHT - 1)] = WALL  # Make bottom wall.
+    for y in range(HEIGHT):
+        board[(0, y)] = WALL  # Make left wall.
+        board[(WIDTH - 1, y)] = WALL  # Make right wall.
+
+    # Add the random walls:
+    for i in range(NUM_WALLS):
+        x, y = getRandomEmptySpace(board, [])
+        board[(x, y)] = WALL
+
+    # Add the starting dead robots:
+    for i in range(NUM_DEAD_ROBOTS):
+        x, y = getRandomEmptySpace(board, [])
+        board[(x, y)] = DEAD_ROBOT
+    return board
+
 
 def getRandomEmptySpace():
     pass
