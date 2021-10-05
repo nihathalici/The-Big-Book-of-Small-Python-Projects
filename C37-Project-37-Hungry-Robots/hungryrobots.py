@@ -97,8 +97,8 @@ def getRandomEmptySpace(board, robots):
         if isEmpty(randomX, randomY, board, robots):
             break
     return (randomX, randomY)
-    
-    
+
+
 def isEmpty(x, y, board, robots):
     """Return True if the (x, y) is empty on the board and there's also
     no robot there."""
@@ -132,8 +132,49 @@ def displayBoard(board, robots, playerPosition):
         print()  # Print a newline.
 
 
-def askForPlayerMove():
-    pass
+def askForPlayerMove(board, robots, playerPosition):
+    """Returns the (x, y) integer tuple of the place the player moves
+    next, given their current location and the walls of the board."""
+    playerX, playerY = playerPosition
+
+    # Find which directions aren't blocked by a wall:
+    q = 'Q' if isEmpty(playerX - 1, playerY - 1, board, robots) else ' '
+    w = 'W' if isEmpty(playerX + 0, playerY - 1, board, robots) else ' '
+    e = 'E' if isEmpty(playerX + 1, playerY - 1, board, robots) else ' '
+    d = 'D' if isEmpty(playerX + 1, playerY + 0, board, robots) else ' '
+    c = 'C' if isEmpty(playerX + 1, playerY + 1, board, robots) else ' '
+    x = 'X' if isEmpty(playerX + 0, playerY + 1, board, robots) else ' '
+    a = 'A' if isEmpty(playerX - 1, playerY + 0, board, robots) else ' '
+    allMoves = (q + w + e + d + c + x + a + z + 'S')
+
+    while True:
+        # Get player's move:
+        print('(T)eleports remaining: {}'.format(board["teleports"]))
+        print('                    ({}) ({}) ({})'.format(q, w, e))
+        print('                    ({}) (S) ({})'.format(a, d))
+        print('Enter move or QUIT: ({}) ({}) ({})'.format(z, x, c))
+
+        move = input('> ').upper()
+        if move == 'QUIT':
+            print('Thanks for playing!')
+            sys.exit()
+        elif move == 'T' and board['teleports'] > 0:
+            # Teleport the player to a random empty space:
+            board['teleports'] -= 1
+            return getRandomEmptySpace(board, robots)
+        elif move != '' and move in allMoves:
+            # Return the new player position based on their move:
+            return {'Q': (playerX - 1, playerY - 1),
+                    'W': (playerX + 0, playerY - 1),
+                    'E': (playerX + 1, playerY - 1),
+                    'D': (playerX + 1, playerY + 0),
+                    'C': (playerX + 1, playerY + 1),
+                    'X': (playerX + 0, playerY + 1),
+                    'Z': (playerX - 1, playerY + 1),
+                    'A': (playerX - 1, playerY + 0),
+                    'S': (playerX, playerY)}[move]
+
+
 
 def moveRobots():
     pass
