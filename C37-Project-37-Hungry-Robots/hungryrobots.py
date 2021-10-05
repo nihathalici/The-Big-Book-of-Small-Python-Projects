@@ -89,17 +89,48 @@ def getNewBoard():
     return board
 
 
-def getRandomEmptySpace():
-    pass
+def getRandomEmptySpace(board, robots):
+    """Return a (x, y) integer tuple of an empty space on the board."""
+    while True:
+        randomX = random.randint(1, WIDTH - 2)
+        randomY = random.randint(1, HEIGHT - 2)
+        if isEmpty(randomX, randomY, board, robots):
+            break
+    return (randomX, randomY)
+    
+    
+def isEmpty(x, y, board, robots):
+    """Return True if the (x, y) is empty on the board and there's also
+    no robot there."""
+    return board[(x, y)] == EMPTY_SPACE and (x, y) not in robots
 
-def isEmpty():
-    pass
+def addRobots(board):
+    """Add NUM_ROBOTS number of robots to empty spaces on the board and
+    return a list of these (x, y) spaces where robots are now located."""
+    robots = []
+    for i in range(NUM_ROBOTS):
+        x, y = getRandomEmptySpace(board, robots)
+        robots.append((x,y))
+    return robots
 
-def addRobots():
-    pass
+def displayBoard(board, robots, playerPosition):
+    """Display the board, robots, and player on the screen."""
+    # Loop over every space on the board:
+    for y in range(HEIGHT):
+        for x in range(WIDTH):
+            # Draw the appropriate character:
+            if board[(x, y)] == WALL:
+                print(WALL, end='')
+            elif board[(x, y)] == DEAD_ROBOT:
+                print(DEAD_ROBOT, end='')
+            elif (x, y) == playerPosition:
+                print(PLAYER, end='')
+            elif (x, y) in robots:
+                print(ROBOT, end='')
+            else:
+                print(EMPTY_SPACE, end='')
+        print()  # Print a newline.
 
-def displayBoard():
-    pass
 
 def askForPlayerMove():
     pass
