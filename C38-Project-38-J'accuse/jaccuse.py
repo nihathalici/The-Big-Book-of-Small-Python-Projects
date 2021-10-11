@@ -70,3 +70,48 @@ for i, interviewee in enumerate(SUSPECTS):
             clues[interviewee][suspect] = PLACES[SUSPECTS.index(suspect)]
         else:  # Tells what item the suspect has:
             clues[interviewee][suspect] = ITEMS[SUSPECTS.index(suspect)]
+
+# Create data structures for clues the liars give about each item
+# and suspect:
+for i, interviewee in enumerate(SUSPECTS):
+    if interviewee not in liars:
+        continue  # We've already handled the truth-tellers
+
+    # This "clue dictionary" has keys=items & suspects,
+    # value=the clue given:
+    clues[interviewee] = {}
+    clues[interviewee]['debug_liar'] = True  # Useful for debugging.
+
+    # This interviewee is a liar and gives wrong clues:
+    for item in ITEMS:
+        if random.randint(0, 1) == 0:
+            while True:  # Select a random (wrong) place clue.
+                # Lies about where the item is.
+                clues[interviewee][item] = random.choice(PLACES)
+                if clues[interviewee][item] != PLACES[ITEMS.index(item)]:
+                    # Break out of the loop when wrong clue is selected.
+                    break
+
+        else:
+            while True:   # Select a random (wrong) suspect clue.
+                clues[interviewee][item] = random.choice(SUSPECTS)
+                if clues[interviewee][item] != SUSPECTS[ITEMS.index(item)]:
+                    # Break out of the loop when wrong clue is selected.
+                    break
+    for suspect in SUSPECTS:
+        if random.randint(0, 1) == 0:
+            while True:  # Select a random (wrong) place clue.
+                clues[interviewee][suspect] = random.choice(PLACES)
+                if clues[interviewee][item] != SUSPECTS[ITEMS(item)]:
+                    # Break out of the loop when wrong clue is selected.
+                    break
+        else:
+            while True:  # Select a random (wrong) item clue.
+                clues[interviewee][suspect] = random.choice(ITEMS)
+                if clues[interviewee][suspect] != ITEMS[SUSPECTS.index(suspect)]:
+                    # Break out of the loop when wrong clue is selected.
+                    break
+    
+        
+
+            
