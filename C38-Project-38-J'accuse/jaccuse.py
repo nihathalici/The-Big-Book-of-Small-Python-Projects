@@ -111,7 +111,20 @@ for i, interviewee in enumerate(SUSPECTS):
                 if clues[interviewee][suspect] != ITEMS[SUSPECTS.index(suspect)]:
                     # Break out of the loop when wrong clue is selected.
                     break
-    
-        
 
-            
+# Create the data structures for clues given when asked about Zophie:
+zophieClues = {}
+for interviewee in random.sample(SUSPECTS, random.randint(3, 4)):
+    kindOfClue = random.randint(1, 3)
+    if kindOfClue == 1:
+        if interviewee not in liars:
+            # They tell you who has Zophie.
+            zophieClues[interviewee] = culprit
+        elif interviewee in liars:
+            while True:
+                # Select a (wrong) suspect clue
+                zophieClues[interviewee] = random.choice(SUSPECTS)
+                if zophieClues[interviewee] != culprit:
+                    # Break out of the loop when wrong clue is selected.
+                    break
+                    
