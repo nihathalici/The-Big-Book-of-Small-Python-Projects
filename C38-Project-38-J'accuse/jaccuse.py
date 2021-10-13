@@ -127,4 +127,50 @@ for interviewee in random.sample(SUSPECTS, random.randint(3, 4)):
                 if zophieClues[interviewee] != culprit:
                     # Break out of the loop when wrong clue is selected.
                     break
-                    
+
+    elif kindOfClue == 2:
+        if interviewee not in liars:
+            # They tell you where Zophie is.
+            zophieClues[interviewee] = PLACES[SUSPECTS.index(culprit)]
+        elif interviewee in liars:
+            while True:
+                # Select a (wrong) place clue.
+                zophieClues[interviewee] = random.choice(PLACES)
+                if zophieClues[interviewee] != PLACES[SUSPECTS.index(culprit)]:
+                    # Break out of the loop when wrong clue is selected.
+                    break
+    elif kindOfClue == 3:
+        if interviewee not in liars:
+            # They tell you what item Zophie is near.
+            zophieClues[interviewee] = ITEMS[SUSPECTS.index(culprit)]
+        elif interviewee in liars:
+            while True:
+                # Select a (wrong) item clue.
+                zophieClues[interviewee] = random.choice(ITEMS)
+                if zophieClues[interviewee] != ITEMS[SUSPECTS.index(culprit)]:
+                    # Break out of the loop when wrong clue is selected.
+                    break
+
+# EXPERIMENT: Uncomment this code to view the clue data structures:
+#import pprint
+#pprint.pprint(clues)
+#pprint.pprint(zophieClues)
+#print('culprit =', culprit)
+
+# START OF THE GAME
+print("""J'ACCUSE! (a mystery game)")
+By Al Sweigart al@inventwithpython.com
+Inspired by Homestar Runner\'s "Where\'s an Egg?" game
+
+You are the world-famous detective Mathilde Camus.
+ZOPHIE THE CAT has gone missing, and you must sift through the clues.
+Suspects either always tell lies, or always tell the truth. Ask them
+about other people, places, and items to see if the details they give are
+truthful and consistent with your observations. Then you will know if
+their clue about ZOPHIE THE CAT is true or not. Will you find ZOPHIE THE
+CAT in time and accuse the guilty party?
+""")
+input('Press Enter to begin...')
+
+startTime = time.time()
+endTime = startTime + TIME_TO_SOLVE
