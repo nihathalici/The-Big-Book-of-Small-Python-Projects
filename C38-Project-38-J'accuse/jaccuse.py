@@ -174,3 +174,59 @@ input('Press Enter to begin...')
 
 startTime = time.time()
 endTime = startTime + TIME_TO_SOLVE
+
+while True:  # Main game loop.
+    if time.time() > endTime or accusationsLeft == 0:
+        # Handle "game over" condition:
+        if time.time() > endTime:
+            print('You have run out of time!')
+        elif accusationsLeft == 0:
+            print('You have accused too many innocent people!')
+        culpritIndex = SUSPECTS.index(culprit)
+        print('It was {} at the {} with the {} who catnapped her!'.format(culprit,
+        PLACES[culpritIndex], ITEMS[culpritIndex]))
+        print('Better luck next time, Detective.')
+        sys.exit()
+
+    print()
+    minutesLeft = int(endTime - time.time()) // 60
+    secondsLeft = int(endTime - time.time()) % 60
+    print('Time left: {} min, {} sec'.format(minutesLeft, secondsLeft))
+
+    if currentLocation == 'TAXI':
+        print('  You are in your TAXI. Where do you want to go?')
+        for place in sorted(PLACES):
+            placeInfo = ''
+            if place in visitedPlaces:
+                placeInfo = visitedPlaces[place]
+            nameLabel = '(' + place[0] + ')' + place[1:]
+            spacing = " " * (LONGEST_PLACE_NAME_LENGTH - len(place))
+            print('{} {}{}'.format(nameLabel, spacing, placeInfo))
+        print('(Q)UIT GAME')
+        while True: # Keep asking until a valid response is given.
+            response = input('> ').upper()
+            if response == '':
+                continue  # Ask again.
+            if response == 'Q':
+                print('Thanks for playing!')
+                sys.exit()
+            if response in PLACE_FIRST_LETTERS.keys():
+                break
+        currentLocation = PLACE_FIRST_LETTERS[response]
+        continue  # Go back to the start of the main game loop.
+
+    # At a place; player can ask for clues.
+    print('  You are at the {}.'.format(currentLocation))
+    currentLocationIndex = PLACES.index(currentLocation)
+    thePersonHere = SUSPECTS[currentLocationIndex]
+    theItemHere = ITEMS[currentLocationIndex]
+    print('  {} with the {} is here.'.format(thePersonHere, theItemHere))
+
+    # Add the suspect and item at this place to our list of known
+    # suspects and items:
+    if thePersonHere not in knownSuspectsAndItems:
+        knownSuspectsAndItems.append(thePersonHere)
+    if ITEMS[currentLocationIndex] not in knownSuspectsAndItems:
+        knownSuspectsAndItems.append(ITEMS[currentLocationIndex])
+    if currentLocation not in visitedPlaces.keys():
+        visitedPlaces[currentLocation] = '({}, {})'.format(thePersonHere.lower(), theItemHere.lower())
