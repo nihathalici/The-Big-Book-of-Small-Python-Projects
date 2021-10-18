@@ -52,7 +52,7 @@ def main():
         ant = {
             'x': random.randint(0, WIDTH - 1),
             'y': random.randint(0, HEIGHT - 1),
-            'direction': random.choice([NORT, SOUTH, EAST, WEST]),
+            'direction': random.choice([NORTH, SOUTH, EAST, WEST]),
         }
         ants.append(ant)
 
