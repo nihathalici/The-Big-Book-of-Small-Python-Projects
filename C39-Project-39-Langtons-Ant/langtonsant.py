@@ -112,10 +112,48 @@ def main():
             changedTiles.append((ant['x'], ant['y']))
 
         board = nextBoard
-                 
+
 
 def displayBoard(board, ants, changedTiles):
     """Displays the board and ants on the screen. The changedTiles
     argument is a list of (x, y) tuples for tiles on the screen that
     have changed and need to be redrawn."""
-    pass
+    # Draw the board data structure:
+    for x, y in changedTiles:
+        bext.goto(x, y)
+        if board.get((x, y), False):
+            bext.bg(BLACK_TILE)
+        else:
+            bext.bg(WHITE_TILE)
+
+        antIsHere = False
+        for ant in ants:
+            if (x, y) == (ant['x'], ant['y']):
+                antIsHere = True
+                if ant['direction'] == NORTH:
+                    print(ANT_UP, end='')
+                elif ant['direction'] == SOUTH:
+                    print(ANT_DOWN, end='')
+                elif ant['direction'] == EAST:
+                    print(ANT_LEFT, end='')
+                elif ant['direction'] == WEST:
+                    print(ANT_RIGHT, end='')
+                break
+        if not antIsHere:
+            print(' ', end='')
+
+    # Display the quit message at the bottom of the screen:
+    bext.goto(0, HEIGHT)
+    bext.bg(WHITE_TILE)
+    print('Press Ctrl-C to quit.', end='')
+
+    sys.stdout.flush()   # (Required for bext-using programs.)
+    time.sleep(PAUSE_AMOUNT)
+
+# If this program was run (instead of imported), run the game:
+if __name__ == '__main__':
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("Langton's Ant, by Al Sweigart al@inventwithpython.com")
+        sys.exit()  # When Ctrl-C is pressed, end the program.
