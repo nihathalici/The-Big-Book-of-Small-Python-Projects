@@ -9,12 +9,12 @@ Tags: large, game, multiplayer"""
 
 import random
 
- Set up the constants:
- GOLD = 'GOLD'
- SILVER = 'SILVER'
- BRONZE = 'BRONZE'
+Set up the constants:
+GOLD = 'GOLD'
+SILVER = 'SILVER'
+BRONZE = 'BRONZE'
 
- STAR_FACE = ["+-----------+",
+STAR_FACE = ["+-----------+",
               "|     .     |",
               "|    ,O,    |",
               "| 'ooOOOoo' |",
