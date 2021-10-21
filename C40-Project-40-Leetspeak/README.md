@@ -2,7 +2,7 @@
 Leetspeak
 ========================================================
 
-This word program automatically converts your text with numbers, 
+This word program automatically converts your text with numbers. 
 
 Sample Output
 ========================================================
