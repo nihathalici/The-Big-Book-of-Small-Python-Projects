@@ -234,3 +234,31 @@ while True:
     if os.path.exists(filename):
         break
     print('There is no file named', filename)
+
+# Load the maze from a file:
+mazeFile = open(filename)
+maze = {}
+lines = mazeFile.readlines()
+px = None
+py = None
+exitx = None
+exity = None
+y = 0
+for line in lines:
+    WIDTH = len(line.rstrip())
+    for x, character in enumerate(line.rstrip()):
+        assert character in (WALL, EMPTY, START, EXIT), 'Invalid Character at column {}, line {}'.format(x + 1, y + 1)
+        if character in (WALL, EMPTY):
+            maze[(x, y)] = character
+        elif character == START:
+            px, py = x, y
+            maze[(x, y)] = EMPTY
+        elif character == EXIT:
+            exitx, exity = x, y
+            maze[(x, y)] = EMPTY
+    y += 1
+HEIGHT = y
+
+assert px != None and py != None, 'No start point in file.'
+assert exitx != None and exity != None, 'No exit point in file.'
+pDir = NORTH
