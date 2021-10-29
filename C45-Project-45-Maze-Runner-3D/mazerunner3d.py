@@ -262,3 +262,56 @@ HEIGHT = y
 assert px != None and py != None, 'No start point in file.'
 assert exitx != None and exity != None, 'No exit point in file.'
 pDir = NORTH
+
+while True:  # Main game loop.
+    displayWallDict(makeWallDict(maze, px, py, pDir, exitx, exity))
+
+    while True:  # Get user move.
+        print('Location ({}, {}) Direction: {}'.format(px, py, pDir))
+        print('                  (W)')
+        print('Enter direction: (A) (D) or QUIT.')
+        move = input('> ').upper()
+
+        if move == 'QUIT':
+            print('Thanks for playing!')
+            sys.exit()
+
+        if (move not in ['F', 'L', 'R', 'W', 'A', 'D']
+            and not move.startswith('T')):
+            print('Please enter one of F, L, or R (or W, A, D).')
+            continue
+
+        # Move the player according to their intended move:
+        if move == 'F' or move == 'W':
+            if pDir == NORTH and maze[(px, py - 1)] == EMPTY:
+                py -= 1
+                break
+            if pDir == SOUTH and maze[(px, py + 1)] == EMPTY:
+                py += 1
+                break
+            if pDir == EAST and maze[(px + 1, py)] == EMPTY:
+                px += 1
+                break
+            if pDir == WEST and maze[(px - 1, py)] == EMPTY:
+                py -= 1
+                break
+        elif move == 'L' or move == 'A':
+            pDir = {NORTH: WEST, WEST: SOUTH,
+                    SOUTH: EAST, EAST: NORTH}[pDir]
+            break
+        elif move == 'R' or move == 'D':
+            pDir = {NORTH: EAST, EAST: SOUTH,
+                    SOUTH: WEST, WEST: NORTH}[pDir]
+            break
+        elif move.startswith('T'):  # Cheat code: 'T x,y'
+            px, py = move.split()[1].split(',')
+            px = int(px)
+            py = int(py)
+            break
+        else:
+            print('You cannot move in that direction.')
+
+    if (px, py) == (exitx, exity):
+        print('You have reached the exit! Good job!')
+        print('Thanks for playing!')
+        sys.exit()
