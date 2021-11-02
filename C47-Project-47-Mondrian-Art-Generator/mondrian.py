@@ -106,7 +106,7 @@ while True:  # Main application loop.
                        else:
                            pointsToDelete.append((startx, y))
 
-            if orientation == 'horizontal':
+            elif orientation == 'horizontal':
                 # Go up one path from the start point, and
                 # see if we can remove this segment:
                 for changex in (-1, 1):
@@ -134,3 +134,13 @@ while True:  # Main application loop.
         # If we can delete this segment, set all the points to white:
         for x, y in pointsToDelete:
             canvas[(x, y)] = WHITE
+
+    # Add the border lines:
+    for x in range(width):
+        canvas[(x, 0)] = BLACK  # Top border.
+        canvas[(x, height - 1)] = BLACK  # Bottom border.
+    for y in range(height):
+        canvas[(0, y)] = BLACK  # Left border.
+        canvas[(width - 1, y)] = BLACK  # Right border.
+
+    
