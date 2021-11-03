@@ -55,7 +55,7 @@ while True:  # Main application loop.
         numberOfSegmentsToDelete += 1
         for x in range(width):
             canvas[(x, y)] = BLACK
-        y += random.randint(MIN_Y_INCREASE, MAX_X_INCREASE)
+        y += random.randint(MIN_Y_INCREASE, MAX_Y_INCREASE)
 
     numberOfRectanglesToPaint = numberOfSegmentsToDelete - 3
     numberOfSegmentsToDelete = int(numberOfSegmentsToDelete * 1.5)
@@ -99,12 +99,12 @@ while True:  # Main application loop.
                                canvas[(startx + 1, y)] == BLACK) or
                               (canvas[(startx - 1, y)] == BLACK and
                                canvas[(startx + 1, y)] == WHITE)):
-                           # We've found a T-intersection; we can't
-                           # delete this segment:
-                           canDeleteSegment = False
-                           break
-                       else:
-                           pointsToDelete.append((startx, y))
+                            # We've found a T-intersection; we can't
+                            # delete this segment:
+                            canDeleteSegment = False
+                            break
+                        else:
+                            pointsToDelete.append((startx, y))
 
             elif orientation == 'horizontal':
                 # Go up one path from the start point, and
@@ -121,14 +121,14 @@ while True:  # Main application loop.
                                canvas[(x, starty + 1)] == BLACK) or
                               (canvas[(x, starty - 1)] == BLACK and
                                canvas[(x, starty + 1)] == WHITE)):
-                           # We've found a T-intersection; we can't
-                           # delete this segment:
-                           canDeleteSegment = False
-                           break
-                       else:
-                           pointsToDelete.append((x, starty))
+                            # We've found a T-intersection; we can't
+                            # delete this segment:
+                            canDeleteSegment = False
+                            break
+                        else:
+                            pointsToDelete.append((x, starty))
             if not canDeleteSegment:
-                continue   # Get a new random start point.
+                continue  # Get a new random start point.
             break  # Move on to delete the segment.
 
         # If we can delete this segment, set all the points to white:
