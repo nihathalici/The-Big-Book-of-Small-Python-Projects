@@ -143,4 +143,42 @@ while True:  # Main application loop.
         canvas[(0, y)] = BLACK  # Left border.
         canvas[(width - 1, y)] = BLACK  # Right border.
 
-    
+    # Paint the rectangles:
+    for i in range(numberOfRectanglesToPaint):
+        while True:
+            startx = random.randint(1, width - 2)
+            starty = random.randint(1, height - 2)
+
+            if canvas[(startx, starty)] != WHITE:
+                continue  # Get a new random start point.
+            else:
+                break
+
+        # Flood fill algorithm:
+        colorToPaint = random.choice([RED, YELLOW, BLUE, BLACK])
+        pointsToPaint = set([(startx, starty)])
+        while len(pointsToPaint) > 0:
+            x, y = pointsToPaint.pop()
+            canvas[(x, y)] = colorToPaint
+            if canvas[(x - 1, y)] == WHITE:
+                pointsToPaint.add((x - 1, y))
+            if canvas[(x + 1, y)] == WHITE:
+                pointsToPaint.add((x + 1, y))
+            if canvas[(x, y - 1)] == WHITE:
+                pointsToPaint.add((x, y - 1))
+            if canvas[(x, y + 1)] == WHITE:
+                pointsToPaint.add((x, y + 1))
+
+    # Draw the canvas data structure:
+    for y in range(height):
+        for x in range(width):
+            bext.bg(canvas[(x, y)])
+            print(' ', end='')
+
+        print()
+
+    # Prompt user to create a new one:
+    try:
+        input('Press Enter for another work of art, or Ctrl-C to quit.')
+    except KeyboardInterrupt:
+        sys.exit()
