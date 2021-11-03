@@ -1,6 +1,8 @@
 Mondrian Art Generator
 ========================================================
 
+This program generates random paintings that follow Mondrian’s style. You can find out more about Piet Mondrian at https://en.wikipedia.org/wiki/ Piet_Mondrian.
+
 
 Sample Output
 ========================================================
