@@ -1,7 +1,7 @@
 Monty Hall Problem
 ========================================================
 
-The Monty Hall Problem illustrates a sur- prising fact of probability. 
+The Monty Hall Problem illustrates a surprising fact of probability. 
 
 
 Sample Output
