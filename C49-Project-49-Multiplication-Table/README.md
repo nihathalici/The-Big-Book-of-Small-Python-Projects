@@ -1,7 +1,7 @@
 Multiplication Table
 ========================================================
 
-The Monty Hall Problem illustrates a surprising fact of probability. 
+This program generates a multiplication table from 0 × 0 to 12 × 12. 
 
 
 Sample Output
