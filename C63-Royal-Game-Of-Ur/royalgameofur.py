@@ -211,7 +211,42 @@ def displayBoard(board):
     print(BOARD_TEMPLATE.format(*spaces))
 
 def getValidMoves(board, player, flipTally):
-    pass
+    validMoves = []  # Contains the spaces with tokens that can move.
+    if player == X_PLAYER:
+        opponent = O_PLAYER
+        track = X_TRACK
+        home = X_HOME
+    elif player == O_PLAYER:
+        opponent = X_PLAYER
+        track = O_TRACK
+        home = O_HOME
+    # Check if the player can move a token from home:
+    if board[home] > 0 and board[track[flipTally]] == EMPTY:
+        validMoves.append('home')
+
+    # Check which spaces have a token the player can move:
+    for trackSpaceIndex, space in enumerate(track):
+        if space == 'H' or space == 'G' or board[space] != player:
+            continue
+        nextTrackSpaceIndex = trackSpaceIndex + flipTally
+        if nextTrackSpaceIndex >= len(track):
+            # You must flip an exact number of moves onto the goal,
+            # otherwise you can't move on the goal.
+            continue
+        else:
+            nextBoardSpaceKey = track[nextTrackSpaceIndex]
+            if nextBoardSpaceKey == 'G':
+                # This token can move off the board:
+                validMoves.append(space)
+                continue
+        if board[nextBoardSpaceKey] in (EMPTY, opponent):
+            # If the next space is the protected middle space, you
+            # can only move there if it is empty:
+            if nextBoardSpaceKey == 'l' and board['l'] == opponent:
+                continue  # Skip this move, the space is protected.
+            validMoves.append(space)
+
+    return validMoves
 
 if __name__ == '__main__':
     main()
