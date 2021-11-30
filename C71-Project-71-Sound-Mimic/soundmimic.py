@@ -7,6 +7,12 @@ Tags: short, beginner, game"""
 
 import random, sys, time
 
+# Download the sound files from these URLs (or use your own):
+# https://inventwithpython.com/soundA.wav
+# https://inventwithpython.com/soundS.wav
+# https://inventwithpython.com/soundD.wav
+# https://inventwithpython.com/soundF.wav
+
 try:
     import playsound
 except ImportError:
@@ -17,6 +23,7 @@ except ImportError:
     print('pip3 install playsound')
     sys.exit()
 
+
 print('''Sound Mimic, by Al Sweigart al@inventwithpython.com
 Try to memorize a pattern of A S D F letters (each with its own sound)
 as it gets longer and longer.''')
@@ -25,7 +32,7 @@ input('Press Enter to begin...')
 
 pattern = ''
 while True:
-    print('\n' * 60) # Clear the screen by printing several newlines.
+    print('\n' * 60)  # Clear the screen by printing several newlines.
 
     # Add a random letter to the pattern:
     pattern = pattern + random.choice('ASDF')
@@ -54,6 +61,7 @@ while True:
 
     if response != pattern:
         print('You scored', len(pattern) - 1, 'points.')
+        print('Thanks for playing!')
         break
 
     time.sleep(1)
