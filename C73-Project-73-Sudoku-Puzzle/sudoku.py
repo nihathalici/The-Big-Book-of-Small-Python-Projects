@@ -102,8 +102,42 @@ class SudokuGrid:
                 # Display a horizontal line:
                 print('   ------+-------+------')
 
-    def _isCompleteSetOfNumbers():
-        pass
+    def _isCompleteSetOfNumbers(self, numbers):
+        """Return True if numbers contains the digits 1 through 9."""
+        return sorted(numbers) == list('123456789')
 
-    def isSolved():
-        pass
+
+    def isSolved(self):
+        """Returns True if the current grid is in a solved state."""
+        # Check each row:
+        for row in range(GRID_LENGTH):
+            rowNumbers = []
+            for x in range(GRID_LENGTH):
+                number = self.grid[(x, row)]
+                rowNumbers.append(number)
+            if not self._isCompleteSetOfNumbers(rowNumbers):
+                return False
+
+        # Check each column:
+        for column in range(GRID_LENGTH):
+            columnNumbers = []
+            for y in range(GRID_LENGTH):
+                number = self.grid[(column, y)]
+                columnNumbers.append(number)
+            if not self._isCompleteSetOfNumbers(columnNumbers):
+                return False
+
+        # Check each box:
+        for boxx in (0, 3, 6):
+            for boxy in (0, 3, 6):
+                boxNumbers = []
+                for x in range(BOX_LENGTH):
+                    for y in range(BOX_LENGTH):
+                        number = self.grid[(boxx + x, boxy + y)]
+                        boxNumbers.append(number)
+                if not self._isCompleteSetOfNumbers(boxNumbers):
+                    return False
+
+        return True
+
+        
