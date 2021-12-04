@@ -5,4 +5,4 @@ The Sudoku board is a 9 × 9 grid in which the player must place the digits 1 to
 Sample Output
 ========================================================
 
-![Sample output Sudoku Puzzle)](https://github.com/nihathalici/The-Big-Book-of-Small-Python-Projects/blob/main/C73-Project-73-Sudoku-Puzzle/sudoku_sample_output.PNG
+![Sample output Sudoku Puzzle](https://github.com/nihathalici/The-Big-Book-of-Small-Python-Projects/blob/main/C73-Project-73-Sudoku-Puzzle/sudoku_sample_output.PNG)
