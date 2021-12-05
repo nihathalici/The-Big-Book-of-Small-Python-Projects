@@ -23,8 +23,34 @@ LEFT   = 0
 MIDDLE = 1
 RIGHT  = 2
 
-def displayCards():
-    pass
+def displayCards(cards):
+    """Display the cards in "cards", which is a list of (rank, suit)
+    tuples."""
+    rows = ['', '', '', '', '']  # Stores the text to display.
+
+    for i, card in enumerate(cards):
+        rank, suit = card  # The card is a tuple data structure.
+        rows[0] += ' ___  '  # Print the top line of the card.
+        rows[1] += |{} | '.format(rank.ljust(2))
+        rows[2] += '| {} | '.format(suit)
+        rows[3] += '|_{}| '.format(rank.rjust(2, '_'))
+
+    # Print each row on the screen:
+    for i in range(5):
+        print(rows[i])
 
 def getRandomCard():
-    pass
+    """Returns a random card that is NOT the Queen of Hearts."""
+    while True:   # Make cards until you get a non-Queen of hearts.
+        rank = random.choice(list('23456789JQKA') + ['10'])
+        suit = random.choice([HEARTS, DIAMONDS, SPADES, CLUBS])
+
+        # Return the card as long as it's not the Queen of Hearts:
+        if rank != 'Q' and suit != HEARTS:
+            return (rank, suit)
+
+print('Three-Card Monte, by Al Sweigart al@inventwithpython.com')
+print()
+print('Find the red lady (the Queen of Hearts)! Keep an eye on how')
+print('the cards move.')
+print()
