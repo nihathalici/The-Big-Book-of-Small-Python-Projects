@@ -198,13 +198,42 @@ def makeMove(board, move):
 
 
 def askForPlayerMove():
-    pass
+    """Asks the player for the direction of their next move (or quit).
+
+    Ensures they enter a valid move: either 'W', 'A', 'S' or 'D'."""
+    print('Enter move: (WASD or Q to quit)')
+    while True:  # Keep looping until they enter a valid move.
+        move = input('> ').upper()
+        if move == 'Q':
+            # End the program:
+            print('Thanks for playing!')
+            sys.exit()
+
+        # Either return the valid move, or loop back and ask again:
+        if move in ('W', 'A', 'S', 'D'):
+            return move
+        else:
+            print('Enter one of "W", "A", "S", "D", or "Q".')
+
 
 def addTwoToBoard(board):
-    pass
+    """Adds a new 2 tile randomly to the board."""
+    while True:
+        randomSpace = (random.randint(0, 3), random.randint(0, 3))
+        if board[randomSpace] == BLANK:
+            board[randomSpace] = 2
+            return  # Return after finding one non-blank tile.
 
 def isFull(board):
-    pass
+    """Returns True if the board data structure has no blanks."""
+    # Loop over every space on the board:
+    for x in range(4):
+        for y in range(4):
+            # If a space is blank, return False:
+            if board[(x, y)] == BLANK:
+                return False
+    return True   # No space is blank, so return True.
+
 
 # If this program was run (instead of imported), run the game:
 if __name__ == '__main__':
