@@ -71,4 +71,31 @@ while True:  # Main game loop.
     print('  (P)our one bucket into another')
     print('  (Q)uit')
 
-    
+    while True:  # Keep asking until the player enters a valid action.
+        move = input('> ').upper()
+        if move == 'QUIT' or move == 'Q':
+            print('Thanks for playing!')
+            sys.exit()
+
+        if move in ('F', 'E', 'P'):
+            break  # Player has selected a valid action.
+        print('Enter F, E, P, or Q')
+
+    # Let the player select a bucket:
+    while True:  # Keep asking until valid bucket entered.
+        print('Select a bucket 8, 5, 3, or QUIT:')
+        srcBucket = input('> ').upper()
+
+        if srcBucket == 'QUIT':
+            print('Thanks for playing!')
+            sys.exit()
+
+        if srcBucket in ('8', '5', '3'):
+            break  # Player has selected a valid bucket.
+
+    # Carry out the selected action:
+    if move == 'F':
+        # Set the amount of water to the max size.
+        srcBucketSize = int(srcBucket)
+        waterInBucket[srcBucket] = srcBucketSize
+        steps += 1 
