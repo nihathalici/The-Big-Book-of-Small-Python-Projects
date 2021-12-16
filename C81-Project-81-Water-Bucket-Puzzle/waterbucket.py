@@ -98,4 +98,32 @@ while True:  # Main game loop.
         # Set the amount of water to the max size.
         srcBucketSize = int(srcBucket)
         waterInBucket[srcBucket] = srcBucketSize
-        steps += 1 
+        steps += 1
+
+    elif move == 'E':
+        waterInBucket[srcBucket] = 0  # Set water amount to nothing.
+        steps += 1
+
+    elif move == 'P':
+        # Let the player select a bucket to pour into:
+        while True:  # Keep asking until valid bucket entered.
+            print('Select a bucket to pour into: 8, 5, or 3')
+            dstBucket = input('> ').upper()
+            if dstBucket in ('8', '5', '3'):
+                break  # Player has selected a valid bucket.
+
+        # Figure out the amount to pour:
+        dstBucketSize = int(dstBucket)
+        emptySpaceInDstBucket = dstBucketSize - waterInBucket[dstBucket]
+        waterInSrcBucket = waterInBucket[srcBucket]
+        amountToPour = min(emptySpaceInDstBucket, waterInSrcBucket)
+
+        # Pour out water from this bucket:
+        waterInBucket[srcBucket] -= amountToPour
+
+        # Put the poured out water into the other bucket:
+        waterInBucket[dstBucket] += amountToPour
+        steps += 1
+
+    elif move == 'C':
+        pass  # If the player selected Cancel, do nothing.
