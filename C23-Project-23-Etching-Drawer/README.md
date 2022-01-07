@@ -1,6 +1,6 @@
 Etching Drawer
 ========================================================
-This program also lets you save your draw- ings to a text file so you can print them out later.
+This program also lets you save your drawings to a text file so you can print them out later.
 
 Sample Output
 ========================================================
