@@ -11,3 +11,8 @@ Links and Appendix
 
 - Get the book: https://nostarch.com/big-book-small-python-programming
 - About Al Sweigart and his works: https://alsweigart.com/
+
+GitHub Sources
+======================================================
+- A serious implementation of the projects by Joshua Gladwin  
+https://github.com/joshuagladwin/The-Big-Book-of-Small-Python-Projects
