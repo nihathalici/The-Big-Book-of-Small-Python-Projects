@@ -15,8 +15,10 @@ Links and Appendix
 GitHub Sources
 ======================================================
 - A module to install the dependencies for the projects in The Big Book of Small Python Projects
+
 https://github.com/asweigart/bigbookpython
 
 
 - A serious implementation of the projects by Joshua Gladwin  
+
 https://github.com/joshuagladwin/The-Big-Book-of-Small-Python-Projects
