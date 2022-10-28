@@ -6,9 +6,15 @@ Synopsis taken from the book: "If you’re tired of standard step-by-step tutori
 Links and Appendix
 ========================================================
 
-- Get the book: 
+- Free online book:
+
+https://inventwithpython.com/bigbookpython/
+
+
+- Get the print book: 
 
 https://nostarch.com/big-book-small-python-programming
+
 
 - About Al Sweigart and his works: 
 
