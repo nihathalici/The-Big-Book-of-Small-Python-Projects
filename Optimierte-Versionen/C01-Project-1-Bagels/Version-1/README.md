@@ -43,3 +43,10 @@
    - More Pythonic way of working with sequences
 
 These optimizations make the code faster, more readable, and more maintainable without changing the game's behavior.
+
+
+Sample Output
+========================================================
+
+
+![Sample output Bagels Deduction Game - Optimized Version-1 ](https://github.com/nihathalici/The-Big-Book-of-Small-Python-Projects/blob/main/Optimierte-Versionen/C01-Project-1-Bagels/Version-1/%20C01-Project-1-Bagels-Optimized-Version-1-Sample-Output.png)
