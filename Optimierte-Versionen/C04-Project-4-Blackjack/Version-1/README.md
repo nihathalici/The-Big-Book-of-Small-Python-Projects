@@ -290,3 +290,11 @@ if __name__ == '__main__':
 - Slightly more memory efficient
 
 These optimizations improve code readability, maintainability, and performance while preserving all original functionality.
+
+
+Sample Output
+========================================================
+
+
+![Sample output BBlackjack](https://github.com/nihathalici/The-Big-Book-of-Small-Python-Projects/blob/main/Optimierte-Versionen/C04-Project-4-Blackjack/Version-1/C04-Project-4-Blackjack-Optimized-Version-1-Sample-Output.png)
+
